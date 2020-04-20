@@ -1,0 +1,19 @@
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "mongoose",
+      "settings": {
+        "client": "mongo",
+        "host": "sportspip-db",
+        "port": "27017",
+        "database": "sportspip",
+        "username": "admin",
+        "password": "sportspip"
+      },
+      "options": {
+        "ssl": false
+      }
+    }
+  }
+}

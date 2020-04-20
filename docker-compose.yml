@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  sportspip-db:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=sportspip
+      - MONGO_INITDB_DATABASE=sportspip
+    ports:
+      - 27017:27017
+    volumes:
+      - ./sportspip_db_volume:/data/db
+    restart: always
+
+  sportspip-api:
+    image: strapi/strapi
+    environment:
+      - APP_NAME=sportspip-api
+      - DATABASE_CLIENT=mongo
+      - DATABASE_HOST=sportspip-db
+      - DATABASE_PORT=27017
+      - DATABASE_NAME=sportspip
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=sportspip
+    ports:
+      - 1337:1337
+    volumes:
+      - ./sportspip_api_volume:/srv/app
+    depends_on:
+      - sportspip-db
+    restart: always
